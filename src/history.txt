@@ -12,6 +12,9 @@ BUGS:
 		zum Analysieren Zwischenergebnisse am besten in Datei schreiben und import Funktion impl.
 
 History:
+	2.4 vom 17.05.26:
+		e da in Linux die Felder nicht mehr richtig colorisiert wurden (seit Java 8 glaub ich bekannt)
+			habe ich nur noch die boarder mit Farbe versehen
 	2.3 vom 1.4.21:
 		e Texte überarbeitet wegen Öffentlichkeitstauglichkeit
 		   war für meinen Papa geschrieben, ü80 damals und etwas übertrieben erklärt

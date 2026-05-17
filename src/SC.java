@@ -40,6 +40,9 @@ public class SC {
 	static final Color LIGHTYELLOW = new Color(255,  255, 51);
 	static final Color DARKRED = new Color(204, 0, 0);
 	static final Color SIGNALRED = new Color(204, 0, 102);
+	
+	static final int boarderWidth = 3;
+	static final int fineBoarderWidth = 1;
 
 	static final String btnTexte[] = new String [] { HILFE, "", "", FUELLEN, GENERIEREN, "", "",
 		MERKEN, LOESCHEN, EINSETZEN, "", LESEN, LOESEN, SCHRITT};

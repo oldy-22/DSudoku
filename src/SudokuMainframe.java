@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.BorderFactory;
 import java.awt.Color;
 import java.util.*;
 
@@ -228,6 +229,7 @@ public class SudokuMainframe extends JFrame implements ActionListener,
 			for (int j = 0; j < 9; j++) {
 				stf[i][j].setText("");
 				stf[i][j].setBackground(Color.WHITE);
+				stf[i][j].setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, SC.fineBoarderWidth));				
 				stf[i][j].setEditable(true);
 			}
 		}
@@ -314,6 +316,7 @@ public class SudokuMainframe extends JFrame implements ActionListener,
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				stf[i][j].setBackground(Color.WHITE);
+				stf[i][j].setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, SC.boarderWidth));				
 				try {
 					buffer[i][j] = Integer.parseInt(stf[i][j].getText()); // Prüfung 0-9 im Konstruktor 
 				} catch (NumberFormatException e) {
@@ -383,7 +386,8 @@ public class SudokuMainframe extends JFrame implements ActionListener,
 		for (int zeile=0; zeile<9; zeile++) {
 			for (int spalte=0; spalte<9; spalte++) {
 				if (sudoku[zeile][spalte].wasGiven()) {
-					stf[zeile][spalte].setBackground(SC.LIGHTGREEN);
+					stf[zeile][spalte].setBackground(SC.LIGHTGREEN); // weil Hintergrund in Linux niocht mehr funktioniert ein Versuch nur die boarder zu färben
+					stf[zeile][spalte].setBorder(BorderFactory.createLineBorder(SC.LIGHTGREEN, SC.boarderWidth));
 					stf[zeile][spalte].setEditable(false);
 				}
 			} 
@@ -433,6 +437,7 @@ public class SudokuMainframe extends JFrame implements ActionListener,
 							//	pruefeSudoku (sudoku);
 							setStatusRow (SC.DARKRED, "Feld ist nicht korrekt befüllt.");
 							stf[i][j].setBackground(SC.SIGNALRED);
+							stf[i][j].setBorder(BorderFactory.createLineBorder(SC.SIGNALRED, SC.boarderWidth));
 							return;
 						} 
 					}
@@ -443,6 +448,7 @@ public class SudokuMainframe extends JFrame implements ActionListener,
 						stf[i][j].setText("");
 						float f = calculateColor ( sv[i][j].size() );
 						stf[i][j].setBackground(new Color (1f, f, f));
+						stf[i][j].setBorder(BorderFactory.createLineBorder(new Color (1f, f, f), SC.boarderWidth));
 					} 
 				}
 			}
@@ -453,7 +459,11 @@ public class SudokuMainframe extends JFrame implements ActionListener,
 
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
-				if (sudoku[i][j].isComment()) stf[i][j].setBackground(SC.LIGHTBLUE);
+				if (sudoku[i][j].isComment()) {
+					stf[i][j].setBackground(SC.LIGHTBLUE);
+					stf[i][j].setBorder(BorderFactory.createLineBorder(SC.LIGHTBLUE, SC.boarderWidth));					
+				}
+				
 			}
 		}
 		
@@ -807,6 +817,7 @@ public class SudokuMainframe extends JFrame implements ActionListener,
 
 		if ( (stepZ>=0) && (stepS>=0) ) stf[stepZ][stepS].setBackground(Color.WHITE);
 		stf[zeile][spalte].setBackground(SC.LIGHTYELLOW);
+		stf[zeile][spalte].setBorder(BorderFactory.createLineBorder(SC.LIGHTYELLOW, SC.boarderWidth));
 		stepZ=zeile; stepS=spalte;
 		
 		if (valid) {
@@ -836,7 +847,9 @@ public class SudokuMainframe extends JFrame implements ActionListener,
 			} 
 		}
 		float f = calculateColor ( sv[zeile][spalte].size() );
+		// stf[zeile][spalte].setOpaque(true); war ein Versuch hat aber nichts gebracht
 		stf[zeile][spalte].setBackground(new Color (1f, f, f));
+		stf[zeile][spalte].setBorder(BorderFactory.createLineBorder(new Color (1f, f, f), SC.boarderWidth));
 	}
 	
 	private void bereinige (int zeile, int spalte, Integer wert) {
@@ -847,7 +860,9 @@ public class SudokuMainframe extends JFrame implements ActionListener,
 			} 
 		}
 		float f = calculateColor ( sv[zeile][spalte].size() );
+		// stf[zeile][spalte].setOpaque(true);
 		stf[zeile][spalte].setBackground(new Color (1f, f, f));
+		stf[zeile][spalte].setBorder(BorderFactory.createLineBorder(new Color (1f, f, f), SC.boarderWidth));
 	}
 
 	private boolean pruefeSudoku( SudokuItem matrix[][]) {
@@ -874,8 +889,10 @@ public class SudokuMainframe extends JFrame implements ActionListener,
 			for (int wert=1; wert<10; wert++) {
 				if ( checker.indexOf(new Integer(wert)) != checker.lastIndexOf(new Integer(wert))) {
 					for (int c=0;c<9; c++)
-						if (matrix[r][c].getValue() == wert)
+						if (matrix[r][c].getValue() == wert) {
 							stf[r][c].setBackground(SC.SIGNALRED);
+							stf[r][c].setBorder(BorderFactory.createLineBorder(SC.SIGNALRED, SC.boarderWidth));
+						}
 					okay = false;
 				}
 			}
@@ -896,8 +913,10 @@ public class SudokuMainframe extends JFrame implements ActionListener,
 			for (int wert=1; wert<10; wert++) {
 				if ( checker.indexOf(new Integer(wert)) != checker.lastIndexOf(new Integer(wert))) {
 					for (int r=0;r<9; r++)
-						if (matrix[r][c].getValue() == wert)
+						if (matrix[r][c].getValue() == wert) {
 							stf[r][c].setBackground(SC.SIGNALRED);
+							stf[r][c].setBorder(BorderFactory.createLineBorder(SC.SIGNALRED, SC.boarderWidth));
+						}
 					okay = false;
 				}
 			}
@@ -922,8 +941,10 @@ public class SudokuMainframe extends JFrame implements ActionListener,
 					if ( checker.indexOf(new Integer(wert)) != checker.lastIndexOf(new Integer(wert))) { 
 						for (int r=0;r<3; r++)
 							for (int c=0;c<3; c++)
-								if (matrix[br*3+r][bc*3+c].getValue() == wert)
-									stf[br*3+r][bc*3+c].setBackground(SC.SIGNALRED);
+								if (matrix[br*3+r][bc*3+c].getValue() == wert) {
+									stf[r][c].setBackground(SC.SIGNALRED);
+									stf[r][c].setBorder(BorderFactory.createLineBorder(SC.SIGNALRED, SC.boarderWidth));
+								}
 						okay = false;
 					}
 				}
@@ -991,9 +1012,13 @@ public class SudokuMainframe extends JFrame implements ActionListener,
 			if ( (4-posY) >= 0) {
 				if ( (4-breite) >= 0) {
 					stf[4-posY][4-breite].setBackground(randomColor);
+					stf[4-posY][4-breite].setBorder(BorderFactory.createLineBorder(randomColor, SC.boarderWidth));
 					stf[4-posY][4+breite].setBackground(randomColor);
+					stf[4-posY][4+breite].setBorder(BorderFactory.createLineBorder(randomColor, SC.boarderWidth));
 					stf[4+posY][4-breite].setBackground(randomColor);
+					stf[4+posY][4-breite].setBorder(BorderFactory.createLineBorder(randomColor, SC.boarderWidth));
 					stf[4+posY][4+breite].setBackground(randomColor);
+					stf[4+posY][4+breite].setBorder(BorderFactory.createLineBorder(randomColor, SC.boarderWidth));
 				}
 			}
 		}
@@ -1014,9 +1039,13 @@ public class SudokuMainframe extends JFrame implements ActionListener,
 			if ( (4-posY) >= 0) {
 				if ( (4-breite) >= 0) {
 					stf[4-posY][4-breite].setBackground(Color.WHITE);
+					stf[4-posY][4-breite].setBorder(BorderFactory.createLineBorder(Color.WHITE, SC.boarderWidth));
 					stf[4-posY][4+breite].setBackground(Color.WHITE);
+					stf[4-posY][4+breite].setBorder(BorderFactory.createLineBorder(Color.WHITE, SC.boarderWidth));
 					stf[4+posY][4-breite].setBackground(Color.WHITE);
+					stf[4+posY][4-breite].setBorder(BorderFactory.createLineBorder(Color.WHITE, SC.boarderWidth));
 					stf[4+posY][4+breite].setBackground(Color.WHITE);
+					stf[4+posY][4+breite].setBorder(BorderFactory.createLineBorder(Color.WHITE, SC.boarderWidth));
 				}
 			}
 		}

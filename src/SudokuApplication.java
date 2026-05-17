@@ -16,7 +16,7 @@ public class SudokuApplication extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final String APP_VERSION = "2.3";
+	private static final String APP_VERSION = "2.4";
 
 	public static void main (String[] args) {
 		
