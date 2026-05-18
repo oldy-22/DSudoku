@@ -12,4 +12,4 @@ Screenshots:
 
 und eine Lösung aus 2026 mit nur noch coloriertem Rahmen (wegen JavaVM und Linux Kompatibilität)
 
-<img width="741" height="413" alt="grafik" src="https://github.com/user-attachments/assets/8ed69656-cf30-4712-ac60-4d61cd38c016" />
+<img width="762" height="413" alt="grafik" src="https://github.com/user-attachments/assets/4f9199ec-3261-411a-b7ef-c21066a5d2b1" />
