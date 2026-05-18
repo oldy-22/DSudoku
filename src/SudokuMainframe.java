@@ -154,7 +154,7 @@ public class SudokuMainframe extends JFrame implements ActionListener,
 
 	public Insets getButtonInsets () { return new Insets (5, 10, 5, 10); }
 	
-	public Insets getBlockInsets () { return new Insets (1, 1, 1, 1); }
+	public Insets getBlockInsets () { return new Insets (3, 5, 3, 5); }
 	
 	@Override
 	public void actionPerformed(ActionEvent evt) {
